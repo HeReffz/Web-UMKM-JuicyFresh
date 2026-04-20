@@ -256,6 +256,37 @@ canvas#hero-lightpass.is-ready {
     color: var(--dark);
 }
 
+.mobile-product-carousel .carousel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 4px;
+}
+
+.mobile-product-carousel .carousel-arrow {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg-main);
+    color: var(--dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.mobile-product-carousel .carousel-arrow:active {
+    transform: scale(0.95);
+}
+
+.mobile-product-carousel .carousel-arrow:hover {
+    background: var(--bg-surface);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
 .mobile-product-carousel .scroll-hint {
     text-align: center;
     color: var(--text-muted);

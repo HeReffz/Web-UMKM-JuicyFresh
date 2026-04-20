@@ -150,6 +150,14 @@
                     <p>Melon Breeze</p>
                 </div>
             </div>
+            <div class="carousel-controls" aria-label="Kontrol carousel macam macam jus">
+                <button type="button" class="carousel-arrow" id="carouselPrevBtn" aria-label="Geser ke kiri">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <button type="button" class="carousel-arrow" id="carouselNextBtn" aria-label="Geser ke kanan">
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
             <div class="scroll-hint"><i class="bi bi-hand-index-thumb me-1"></i> Geser untuk lihat semua</div>
         </div>
     </div>
@@ -570,7 +578,13 @@
 <script>
     // Mobile Carousel Drag-to-Scroll + Curved 3D Effect
     const track = document.getElementById('mobileCarouselTrack');
+    const prevBtn = document.getElementById('carouselPrevBtn');
+    const nextBtn = document.getElementById('carouselNextBtn');
     if(track) {
+        const cards = Array.from(track.querySelectorAll('.carousel-item-card'));
+        const maxIndex = Math.max(cards.length - 1, 0);
+        let activeIndex = 0;
+        let autoSlideTimer = null;
         let isDown = false, startX, scrollLeft;
         track.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
         track.addEventListener('mouseleave', () => { isDown = false; });
@@ -579,6 +593,56 @@
         // Touch drag
         track.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
         track.addEventListener('touchmove', (e) => { const x = e.touches[0].pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX); });
+
+        function getScrollStep() {
+            if (cards.length < 2) return track.clientWidth * 0.85;
+            return cards[1].offsetLeft - cards[0].offsetLeft;
+        }
+
+        function goToSlide(index, behavior = 'smooth') {
+            activeIndex = index;
+            track.scrollTo({
+                left: getScrollStep() * index,
+                behavior
+            });
+        }
+
+        function moveSlide(direction) {
+            let nextIndex = activeIndex + direction;
+            if (nextIndex > maxIndex) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = maxIndex;
+            goToSlide(nextIndex);
+        }
+
+        function restartAutoSlide() {
+            if (autoSlideTimer) {
+                clearInterval(autoSlideTimer);
+            }
+            autoSlideTimer = setInterval(() => {
+                moveSlide(1);
+            }, 1500);
+        }
+
+        function syncActiveIndexFromScroll() {
+            const step = getScrollStep();
+            if (!step) return;
+            const nearest = Math.round(track.scrollLeft / step);
+            activeIndex = Math.max(0, Math.min(maxIndex, nearest));
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                moveSlide(-1);
+                restartAutoSlide();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                moveSlide(1);
+                restartAutoSlide();
+            });
+        }
 
         // Curved 3D effect on scroll
         function updateCarouselCurve() {
@@ -601,14 +665,19 @@
             if (framePending) return;
             framePending = true;
             requestAnimationFrame(() => {
+                syncActiveIndexFromScroll();
                 updateCarouselCurve();
                 framePending = false;
             });
         }
 
         track.addEventListener('scroll', scheduleCarouselUpdate, { passive: true });
+        track.addEventListener('touchstart', restartAutoSlide, { passive: true });
+        track.addEventListener('mousedown', restartAutoSlide);
         window.addEventListener('resize', scheduleCarouselUpdate);
+        window.addEventListener('resize', () => goToSlide(activeIndex, 'auto'));
         updateCarouselCurve();
+        restartAutoSlide();
     }
 </script>
 </body>
