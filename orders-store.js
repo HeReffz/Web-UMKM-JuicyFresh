@@ -2,9 +2,22 @@
     const LOCAL_KEY = "orders";
 
     const cfg = window.JUICYFRESH_SYNC || {};
-    const supabaseUrl = (cfg.supabaseUrl || "").replace(/\/$/, "");
-    const supabaseAnonKey = cfg.supabaseAnonKey || "";
-    const cloudEnabled = Boolean(supabaseUrl && supabaseAnonKey);
+    const firebaseCfg = cfg.firebase || {};
+    const firebaseConfigured = Boolean(firebaseCfg.apiKey && firebaseCfg.projectId && firebaseCfg.appId);
+
+    let db = null;
+    if (firebaseConfigured && window.firebase) {
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseCfg);
+            }
+            db = firebase.firestore();
+        } catch (err) {
+            console.warn("Firebase init failed, fallback to local storage.", err);
+        }
+    }
+
+    const cloudEnabled = Boolean(db);
 
     function getLocalOrders() {
         return JSON.parse(localStorage.getItem(LOCAL_KEY)) || [];
@@ -14,48 +27,42 @@
         localStorage.setItem(LOCAL_KEY, JSON.stringify(orders));
     }
 
-    function headers(extra) {
+    function normalizeOrder(record) {
         return {
-            apikey: supabaseAnonKey,
-            Authorization: "Bearer " + supabaseAnonKey,
-            "Content-Type": "application/json",
-            ...extra
+            id: String(record.id),
+            nama: record.nama || "",
+            hp: record.hp || "",
+            jus: record.jus || "",
+            jumlah: Number(record.jumlah || 0),
+            catatan: record.catatan || "",
+            status: record.status || "Pre-Order",
+            created_at: record.created_at || Number(record.id) || Date.now()
         };
     }
 
-    async function supabaseFetch(path, options) {
-        const res = await fetch(supabaseUrl + path, options);
-        if (!res.ok) {
-            const text = await res.text();
-            throw new Error("Supabase error " + res.status + ": " + text);
-        }
-        return res;
+    function sortByCreatedDesc(orders) {
+        return [...orders].sort((a, b) => Number(b.created_at || b.id || 0) - Number(a.created_at || a.id || 0));
     }
 
     async function getOrders() {
         if (!cloudEnabled) return getLocalOrders();
 
         try {
-            const res = await supabaseFetch(
-                "/rest/v1/orders?select=*&order=id.desc",
-                {
-                    method: "GET",
-                    headers: headers()
-                }
-            );
-            const remoteOrders = await res.json();
-            if (remoteOrders.length === 0) {
+            const snap = await db.collection("orders").orderBy("created_at", "desc").get();
+            if (snap.empty) {
                 const localOrders = getLocalOrders();
                 if (localOrders.length > 0) {
-                    await supabaseFetch("/rest/v1/orders", {
-                        method: "POST",
-                        headers: headers({ Prefer: "return=representation" }),
-                        body: JSON.stringify(localOrders)
+                    const batch = db.batch();
+                    localOrders.forEach((item) => {
+                        const order = normalizeOrder(item);
+                        batch.set(db.collection("orders").doc(order.id), order);
                     });
-                    return [...localOrders].reverse();
+                    await batch.commit();
+                    return sortByCreatedDesc(localOrders.map(normalizeOrder));
                 }
             }
-            return remoteOrders;
+
+            return snap.docs.map((doc) => normalizeOrder({ id: doc.id, ...doc.data() }));
         } catch (err) {
             console.warn("Cloud read failed, fallback to local storage.", err);
             return getLocalOrders();
@@ -65,21 +72,18 @@
     async function addOrder(order) {
         if (!cloudEnabled) {
             const orders = getLocalOrders();
-            orders.push(order);
+            orders.push(normalizeOrder(order));
             setLocalOrders(orders);
             return;
         }
 
         try {
-            await supabaseFetch("/rest/v1/orders", {
-                method: "POST",
-                headers: headers({ Prefer: "return=representation" }),
-                body: JSON.stringify(order)
-            });
+            const payload = normalizeOrder(order);
+            await db.collection("orders").doc(payload.id).set(payload);
         } catch (err) {
             console.warn("Cloud write failed, fallback to local storage.", err);
             const orders = getLocalOrders();
-            orders.push(order);
+            orders.push(normalizeOrder(order));
             setLocalOrders(orders);
         }
     }
@@ -96,11 +100,7 @@
         }
 
         try {
-            await supabaseFetch("/rest/v1/orders?id=eq." + encodeURIComponent(id), {
-                method: "PATCH",
-                headers: headers({ Prefer: "return=representation" }),
-                body: JSON.stringify({ status: status })
-            });
+            await db.collection("orders").doc(String(id)).update({ status: status });
         } catch (err) {
             console.warn("Cloud update failed, fallback to local storage.", err);
             const orders = getLocalOrders();
@@ -119,10 +119,10 @@
         }
 
         try {
-            await supabaseFetch("/rest/v1/orders?id=not.is.null", {
-                method: "DELETE",
-                headers: headers()
-            });
+            const snap = await db.collection("orders").get();
+            const batch = db.batch();
+            snap.forEach((doc) => batch.delete(doc.ref));
+            await batch.commit();
         } catch (err) {
             console.warn("Cloud clear failed, fallback to local storage.", err);
             localStorage.removeItem(LOCAL_KEY);
