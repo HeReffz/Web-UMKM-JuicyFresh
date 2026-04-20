@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuicyFresh. - Heritage</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    
+    <div id="transition-curtain"></div>
+
+    <div class="ambient-glow"></div>
+
+    
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4 transition-link" href="index.html" style="color: var(--dark); letter-spacing: -1px;">
+                JuicyFresh.
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link transition-link " href="index.html">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="about.html">Heritage</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="menu.html">Collection</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="contact.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="data_order.html">System</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a class="btn btn-premium transition-link" href="order.html">Order <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="d-lg-none mobile-order-btn" style="display:none;">
+                    <a class="btn btn-premium w-100 transition-link" href="order.html">Order Sekarang <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="height: 90px;"></div>
+
+    
+    <section class="d-flex align-items-center position-relative heritage-header-mobile" style="padding-top: 100px; min-height: 100vh;">
+        <div class="ambient-glow"></div>
+        <div class="container my-3 my-lg-5 pb-3 pb-lg-5">
+            <div class="row align-items-center g-4 g-lg-5">
+                <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right" data-aos-duration="1200">
+                    <h6 class="text-uppercase fw-bold mb-3 tracking-widest text-primary" style="letter-spacing: 2px;">The Origin Story</h6>
+                    <h1 class="fw-bold text-dark" style="font-size: clamp(2.2rem, 5vw, 4.5rem); letter-spacing:-2px;">Nature's <br><span class="text-gradient">Engine.</span></h1>
+                    
+                    <p class="fs-5 text-muted mb-3 mb-lg-4 mt-3 mt-lg-4" style="font-weight: 300; line-height: 1.8;">
+                        Berawal dari sebuah dapur kecil di tahun 2021, kami menolak industri minuman modern yang dipenuhi gula buatan dan perisa sintetis. Misi kami sederhana: <strong class="text-dark">membawa intisari alam secara mentah, namun elegan.</strong>
+                    </p>
+                    
+                    <div class="row mt-3 mt-lg-5 g-3 g-lg-4 py-3 py-lg-4 border-top border-bottom">
+                        <div class="col-6">
+                            <h2 class="fw-bold display-4 text-dark" style="letter-spacing:-2px;"><span class="counter-value" data-target="10">0</span>K+</h2>
+                            <p class="text-muted fw-bold small text-uppercase" style="letter-spacing:1px;">Gelas Terjual</p>
+                        </div>
+                        <div class="col-6">
+                            <h2 class="fw-bold display-4 text-gradient" style="letter-spacing:-2px;"><span class="counter-value" data-target="50">0</span>+</h2>
+                            <p class="text-muted fw-bold small text-uppercase" style="letter-spacing:1px;">Petani Lokal Dibantu</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-duration="1200">
+                    <div class="position-relative text-center">
+                        <div class="position-absolute top-50 start-50 translate-middle" style="width: 80%; height: 80%; background: radial-gradient(circle, rgba(255,159,28,0.15) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; z-index: -1;"></div>
+                        <img src="assets/strawberry_juice.png" class="img-fluid floating-product" alt="JuicyFresh Heritage" style="width: 55%; filter: drop-shadow(0 20px 40px rgba(255, 71, 126, 0.15)); transform: rotate(-5deg);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-5 bg-white text-center" style="padding-top: 100px !important; padding-bottom: 100px !important;">
+        <div class="container px-4">
+            <h6 class="text-primary fw-bold text-uppercase mb-3" style="letter-spacing: 2px;" data-aos="fade-down">Filosofi Kami</h6>
+            <h2 class="display-4 fw-bold text-dark mb-5" style="letter-spacing:-2px;" data-aos="fade-up">Konstruksi Sebuah <span class="text-gradient">Kesempurnaan</span></h2>
+            
+            <div class="row g-5 mt-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bento-item text-center h-100">
+                        <div class="display-4 icon-gradient mb-4"><i class="bi bi-droplet-half"></i></div>
+                        <h4 class="fw-bold text-dark">Zero Dilution</h4>
+                        <p class="text-muted small mt-3">Tidak ada penambahan air sama sekali. 100% cairan yang Anda minum adalah saripati murni tanaman yang diekstraksi.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bento-item text-center h-100">
+                        <div class="display-4 icon-gradient mb-4"><i class="bi bi-shield-check"></i></div>
+                        <h4 class="fw-bold text-dark">Radical Transparency</h4>
+                        <p class="text-muted small mt-3">Pelanggan berhak tahu. Kami tidak pernah menyembunyikan bahan pengawet di balik tabel komposisi yang rumit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bento-item text-center h-100">
+                        <div class="display-4 icon-gradient mb-4"><i class="bi bi-globe-americas"></i></div>
+                        <h4 class="fw-bold text-dark">Earth-First</h4>
+                        <p class="text-muted small mt-3">Seluruh kemasan kami menggunakan plastik daur ulang khusus (rPET) dan seluruh sisa ampas jus kami jadikan kompos kebun.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-5" style="background-color: var(--bg-surface); padding-top: 100px !important; padding-bottom: 100px !important;">
+        <div class="container px-4">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+                    <div class="position-relative p-4">
+                        
+                        <div class="rounded-4 overflow-hidden position-relative shadow-lg border" style="height: 400px; background: linear-gradient(135deg, var(--bg-surface), #f1f1f1);">
+                            <div class="position-absolute top-50 start-50 translate-middle text-center w-100">
+                                <i class="bi bi-pin-map text-primary display-1 mb-3"></i>
+                                <h3 class="fw-bold text-dark">100% Nusantara</h3>
+                                <p class="text-muted">Probolinggo • Lumajang • Malang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                    <h6 class="text-primary fw-bold text-uppercase mb-3" style="letter-spacing: 2px;">Local Empowerment</h6>
+                    <h2 class="display-4 fw-bold text-dark mb-4" style="letter-spacing:-2px;">Dari Tangan <span class="text-gradient">Petani Lokal.</span></h2>
+                    <p class="fs-5 text-muted mb-4" style="font-weight: 300; line-height: 1.8;">
+                        Sebuah maha-karya tidak bisa didelegasikan. Kami memotong jalur tengkulak dan memborong buah-buahan organik langsung dari perkebunan lokal di Jawa Timur. 
+                    </p>
+                    <p class="fs-5 text-muted" style="font-weight: 300; line-height: 1.8;">
+                        Ini bukan hanya tentang mendapatkan kualitas kelas Grade-A. Tapi tentang membayar apresiasi yang layak untuk para petani yang merawat buah tersebut selama berbulan-bulan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-5 bg-white text-center" style="padding-top: 100px !important; padding-bottom: 100px !important;">
+        <div class="container">
+            <h1 class="display-3 fw-bold text-dark mb-4" data-aos="zoom-in" style="letter-spacing:-2px;">Jadilah Bagian dari <span class="text-gradient">Mahakarya Kami.</span></h1>
+            <p class="fs-4 text-muted mx-auto mb-5" style="max-width: 600px;" data-aos="fade-up">Pelajari lebih lanjut tentang daftar menu revolusioner yang sudah kami kalibrasi hari ini.</p>
+            <a href="menu.html" class="btn btn-premium btn-lg transition-link px-5 py-3 shadow-lg" data-aos="fade-up">Explore Collection <i class="bi bi-arrow-right ms-2"></i></a>
+        </div>
+    </section>
+
+<div class="footer-gradient-line mt-5"></div>
+<footer class="footer pt-5 pb-4 bg-white" style="box-shadow: 0 -15px 40px rgba(0,0,0,0.04); position: relative; z-index: 10;">
+    <div class="container text-center text-md-start">
+        <div class="row align-items-center py-4 mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <h3 class="fw-bold m-0" style="color: var(--dark); letter-spacing:-1px;">JuicyFresh.</h3>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="https://www.instagram.com/juicefreshhealthy?igsh=endxendseDdnZjF0" target="_blank" class="text-muted text-decoration-none me-4">Instagram</a>
+                <a href="https://x.com/Juicyfresh5" target="_blank" class="text-muted text-decoration-none me-4">Twitter</a>
+                <a href="https://www.facebook.com/juicyfresh.co?locale=id_ID" target="_blank" class="text-muted text-decoration-none">Facebook</a>
+            </div>
+        </div>
+
+        <div class="row pt-2 pb-4">
+            <div class="col-md-6">
+                <p class="text-muted fs-6 pe-lg-5">Mendefinisikan ulang standar kesegaran organik. Tanpa batasan rasa,
+                    tanpa kompromi. Didesain dengan sangat hati-hati di Indonesia.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p class="text-muted small">&copy; 2026 JuicyFresh Incorporated. Hak cipta dilindungi undang-undang.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+    // 1. Initialize Lenis for Buttery Smooth Scroll
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like easing
+        smooth: true,
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // 2. Initialize AOS
+    AOS.init({ duration: 900, once: true, offset: 50, easing: 'ease-out-cubic' });
+
+    // Navbar blur control
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.glass-navbar');
+        if (window.scrollY > 20) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // 3. Entry Page Transition (Curtain up)
+    window.addEventListener('load', () => {
+        gsap.to("#transition-curtain", {
+            duration: 0.8,
+            scaleY: 0,
+            ease: "power4.inOut"
+        });
+    });
+
+    // 4. Exit Page Transition (Curtain down on links)
+    document.querySelectorAll('a.transition-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Ignore new tabs or anchors
+            if (this.target === '_blank' || this.href.includes('#')) return;
+
+            const href = this.getAttribute('href');
+            if (href) {
+                e.preventDefault();
+                // Slide curtain down
+                gsap.fromTo("#transition-curtain",
+                    { scaleY: 0, transformOrigin: "bottom" },
+                    {
+                        scaleY: 1,
+                        duration: 0.6,
+                        ease: "power4.inOut",
+                        onComplete: () => { window.location.href = href; }
+                    }
+                );
+            }
+        });
+    });
+        // 5. Number Counter Animation
+        const counters = document.querySelectorAll('.counter-value');
+        if (counters.length > 0) {
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const target = +entry.target.getAttribute('data-target');
+                        const duration = 2000; // 2 seconds
+                        const step = target / (duration / 16); 
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            current += step;
+                            if(current < target) {
+                                entry.target.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                entry.target.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }); // Starts when 50% visible
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        }
+
+        // 6. Swiper Init (if testimonial exists)
+        if(document.querySelector('.testimonialSwiper')) {
+            new Swiper(".testimonialSwiper", {
+                slidesPerView: 1, spaceBetween: 30, loop: true,
+                autoplay: { delay: 3500, disableOnInteraction: false },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+            });
+        }
+
+        // 7. Canvas Image Sequence Scrubbing (Apple-Style)
+        const canvas = document.getElementById("hero-lightpass");
+        if(canvas) {
+            const context = canvas.getContext("2d");
+            // GANTI INI SESUAI UKURAN ASLI RESOLUSI IMAGE KAMU (PENTING!)
+            canvas.width = 1280; 
+            canvas.height = 720; 
+
+            const frameCount = 192; // Total Frames
+            
+            const currentFrame = index => (
+                `assets/ezgif-3bff64578a2b0eb8-jpg/ezgif-frame-${index.toString().padStart(3, '0')}.png`
+            );
+
+            const images = [];
+            const seq = { frame: 0 };
+
+            for (let i = 0; i < frameCount; i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                images.push(img);
+            }
+
+            // Draw initial frame once loaded
+            images[0].onload = render;
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.to(seq, {
+                frame: frameCount - 1,
+                snap: "frame",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#hero-sequence-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5
+                },
+                onUpdate: render
+            });
+            
+            // Text Overlays Timeline
+            const textTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero-sequence-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5
+                }
+            });
+
+            textTl.to("#seq-text-1", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-1", {opacity: 0, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-2", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-2", {opacity: 0, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-3", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-3", {opacity: 0, duration: 1, ease: "power1.inOut"});
+
+            function render() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(images[seq.frame], 0, 0, canvas.width, canvas.height);
+            }
+        }
+    </script>
+<script>
+
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if(link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuicyFresh. - System</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    
+    <div id="transition-curtain"></div>
+
+    <div class="ambient-glow"></div>
+
+    
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4 transition-link" href="index.html" style="color: var(--dark); letter-spacing: -1px;">
+                JuicyFresh.
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link transition-link " href="index.html">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="about.html">Heritage</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="menu.html">Collection</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="contact.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="data_order.html">System</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a class="btn btn-premium transition-link" href="order.html">Order <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="d-lg-none mobile-order-btn" style="display:none;">
+                    <a class="btn btn-premium w-100 transition-link" href="order.html">Order Sekarang <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="height: 90px;"></div>
+
+    <div class="ambient-glow"></div>
+
+    <div class="container my-5 pt-5 pb-5" style="min-height: 70vh;">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 pb-3 border-bottom system-header-mobile" data-aos="fade-down">
+            <div>
+                <h2 class="fw-900 text-dark" style="font-size: clamp(2rem, 5vw, 3rem);"><i class="bi bi-server"></i> System <span class="text-gradient">Logs.</span></h2>
+                <p class="text-muted mt-2 mb-0">Database penampungan pesanan sesi aktif.</p>
+            </div>
+            <div class="mt-4 mt-md-0 d-flex gap-2 gap-md-3">
+                <a href="order.html" class="btn border border-secondary text-dark rounded-pill px-3 px-md-4 bg-white shadow-sm fw-bold"><i class="bi bi-plus"></i> New Data</a>
+                <a href="#" id="clearDataBtn" class="btn btn-outline-danger rounded-pill px-3 px-md-4 shadow-sm fw-bold"><i class="bi bi-trash"></i> Purge</a>
+            </div>
+        </div>
+
+        
+        <div class="table-card p-3 desktop-order-table" data-aos="fade-up">
+            <div class="card-body">
+                <div class="table-responsive pb-5 mb-5" style="min-height: 400px; overflow: visible;">
+                    <table class="table table-hover align-middle mb-0 text-dark">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="border-0 rounded-start">Log ID</th>
+                                <th class="border-0">Konsumen</th>
+                                <th class="border-0">Varian Jus</th>
+                                <th class="border-0 text-center">Qty</th>
+                                <th class="border-0">Catatan Khusus</th>
+                                <th class="border-0 rounded-end">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="mobile-order-cards" id="mobileOrderCards" data-aos="fade-up"></div>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const tbody = document.getElementById('orderTableBody');
+        const mobileContainer = document.getElementById('mobileOrderCards');
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        
+        const clearBtn = document.getElementById('clearDataBtn');
+        if(clearBtn) {
+            clearBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if(confirm('WARNING: Purge data? Database lokal akan di-reset!')) {
+                    localStorage.removeItem('orders');
+                    window.location.reload();
+                }
+            });
+        }
+
+        if (orders.length > 0) {
+            tbody.innerHTML = '';
+            let mobileHTML = '';
+            const reversedOrders = [...orders].reverse();
+            reversedOrders.forEach(row => {
+                let statusColor = 'secondary';
+                let statusIcon = 'bi-circle';
+                
+                if (row.status === 'Pre-Order') {
+                    statusColor = 'warning text-dark';
+                    statusIcon = 'bi-clock-history';
+                } else if (row.status === 'Pembuatan') {
+                    statusColor = 'primary';
+                    statusIcon = 'bi-cup-straw';
+                } else if (row.status === 'Pengiriman') {
+                    statusColor = 'info text-dark';
+                    statusIcon = 'bi-truck';
+                } else if (row.status === 'Selesai') {
+                    statusColor = 'success';
+                    statusIcon = 'bi-check2-circle';
+                }
+                
+                // Desktop table row
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><span class="text-muted fw-bold">#${row.id.slice(-6)}</span></td>
+                    <td>
+                        <div class="fw-bold text-dark">${row.nama}</div>
+                        <div class="text-muted small mt-1"><i class="bi bi-telephone-fill"></i> ${row.hp}</div>
+                    </td>
+                    <td><span class="fw-bold text-gradient">${row.jus}</span></td>
+                    <td class="text-center"><span class="badge bg-light border text-dark px-3 py-2 rounded-pill">${row.jumlah}</span></td>
+                    <td><small class="text-muted d-block text-wrap" style="max-width:200px;">${!row.catatan ? '<i>No custom script</i>' : row.catatan}</small></td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-${statusColor.split(' ')[0]} dropdown-toggle rounded-pill px-3 fw-bold bg-${statusColor.split(' ')[0]} bg-opacity-10 border-${statusColor.split(' ')[0]} ${statusColor.includes('text-dark') ? 'text-dark' : ''}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi ${statusIcon} me-1"></i> ${row.status}
+                            </button>
+                            <ul class="dropdown-menu shadow-lg border-0 rounded-4 p-2 mt-2" style="min-width: 180px;">
+                                <li><span class="dropdown-header fw-bolder text-uppercase text-secondary" style="font-size:0.7rem; letter-spacing: 1px;">Update Status</span></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark mb-1 dropdown-hover status-update" href="#" data-id="${row.id}" data-status="Pre-Order"><i class="bi bi-clock-history me-2 text-warning"></i>Pre-Order</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark mb-1 dropdown-hover status-update" href="#" data-id="${row.id}" data-status="Pembuatan"><i class="bi bi-cup-straw me-2 text-primary"></i>Pembuatan</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark mb-1 dropdown-hover status-update" href="#" data-id="${row.id}" data-status="Pengiriman"><i class="bi bi-truck me-2 text-info"></i>Pengiriman</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark dropdown-hover status-update" href="#" data-id="${row.id}" data-status="Selesai"><i class="bi bi-check2-circle me-2 text-success"></i>Selesai</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                // Mobile card
+                mobileHTML += `
+                <div class="mobile-order-card">
+                    <div class="order-card-header">
+                        <span class="text-muted fw-bold">#${row.id.slice(-6)}</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-${statusColor.split(' ')[0]} dropdown-toggle rounded-pill px-3 fw-bold bg-${statusColor.split(' ')[0]} bg-opacity-10 border-${statusColor.split(' ')[0]} ${statusColor.includes('text-dark') ? 'text-dark' : ''}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi ${statusIcon} me-1"></i> ${row.status}
+                            </button>
+                            <ul class="dropdown-menu shadow-lg border-0 rounded-4 p-2 mt-2" style="min-width: 180px;">
+                                <li><span class="dropdown-header fw-bolder text-uppercase text-secondary" style="font-size:0.7rem; letter-spacing: 1px;">Update Status</span></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark mb-1 status-update" href="#" data-id="${row.id}" data-status="Pre-Order"><i class="bi bi-clock-history me-2 text-warning"></i>Pre-Order</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark mb-1 status-update" href="#" data-id="${row.id}" data-status="Pembuatan"><i class="bi bi-cup-straw me-2 text-primary"></i>Pembuatan</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark mb-1 status-update" href="#" data-id="${row.id}" data-status="Pengiriman"><i class="bi bi-truck me-2 text-info"></i>Pengiriman</a></li>
+                                <li><a class="dropdown-item rounded-3 py-2 fw-semibold text-dark status-update" href="#" data-id="${row.id}" data-status="Selesai"><i class="bi bi-check2-circle me-2 text-success"></i>Selesai</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="order-card-row">
+                        <span class="order-card-label">Konsumen</span>
+                        <span class="order-card-value fw-bold">${row.nama}<br><small class="text-muted fw-normal"><i class="bi bi-telephone-fill"></i> ${row.hp}</small></span>
+                    </div>
+                    <div class="order-card-row" style="align-items: flex-start;">
+                        <span class="order-card-label" style="padding-top:4px;">Varian Jus</span>
+                        <div class="order-card-value" style="text-align:right;">
+                            ${row.jus.split('<br>').map(item => {
+                                const clean = item.replace(/<[^>]*>/g, '').trim();
+                                const match = clean.match(/^(.+?)\s+x(\d+)$/);
+                                if(match) {
+                                    return `<div style="margin-bottom:2px;"><span class="fw-bold" style="background:linear-gradient(135deg,#ff477e,#ff9f1c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${match[1]}</span> <span class="badge bg-primary rounded-pill text-white" style="font-size:0.65rem;padding:3px 7px;">x${match[2]}</span></div>`;
+                                }
+                                return `<div class="fw-bold" style="background:linear-gradient(135deg,#ff477e,#ff9f1c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">${clean}</div>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                    <div class="order-card-row">
+                        <span class="order-card-label">Qty</span>
+                        <span class="order-card-value"><span class="badge px-3 py-2 rounded-pill fw-bold" style="background: var(--dark); color: #fff; font-size: 0.85rem;">${row.jumlah}</span></span>
+                    </div>
+                    <div class="order-card-row">
+                        <span class="order-card-label">Catatan</span>
+                        <span class="order-card-value text-muted" style="font-size:0.85rem;">${!row.catatan ? '<i>No custom script</i>' : row.catatan}</span>
+                    </div>
+                </div>`;
+            });
+            mobileContainer.innerHTML = mobileHTML;
+        } else {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center py-5 border-0">
+                        <div class="mb-4 text-muted opacity-25" style="font-size: 4rem;"><i class="bi bi-server"></i></div>
+                        <h5 class="fw-bold text-muted">No Data Detected.</h5>
+                        <p class="text-muted small">Local logs are completely empty.</p>
+                    </td>
+                </tr>
+            `;
+            mobileContainer.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="mb-4 text-muted opacity-25" style="font-size: 4rem;"><i class="bi bi-server"></i></div>
+                    <h5 class="fw-bold text-muted">No Data Detected.</h5>
+                    <p class="text-muted small">Local logs are completely empty.</p>
+                </div>
+            `;
+        }
+        
+        // Status Update Logic
+        document.addEventListener('click', function(e) {
+            let target = e.target;
+            // Handle if they clicked on the icon inside the link
+            if(!target.classList.contains('status-update') && target.parentElement.classList.contains('status-update')) {
+                target = target.parentElement;
+            }
+            if(target.classList.contains('status-update')) {
+                e.preventDefault();
+                const id = target.getAttribute('data-id');
+                const newStatus = target.getAttribute('data-status');
+                
+                let currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
+                const idx = currentOrders.findIndex(o => o.id == id);
+                if(idx !== -1) {
+                    currentOrders[idx].status = newStatus;
+                    localStorage.setItem('orders', JSON.stringify(currentOrders));
+                    window.location.reload();
+                }
+            }
+        });
+    });
+</script>
+
+<div class="footer-gradient-line mt-5"></div>
+<footer class="footer pt-5 pb-4 bg-white" style="box-shadow: 0 -15px 40px rgba(0,0,0,0.04); position: relative; z-index: 10;">
+    <div class="container text-center text-md-start">
+        <div class="row align-items-center py-4 mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <h3 class="fw-bold m-0" style="color: var(--dark); letter-spacing:-1px;">JuicyFresh.</h3>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="https://www.instagram.com/juicefreshhealthy?igsh=endxendseDdnZjF0" target="_blank" class="text-muted text-decoration-none me-4">Instagram</a>
+                <a href="https://x.com/Juicyfresh5" target="_blank" class="text-muted text-decoration-none me-4">Twitter</a>
+                <a href="https://www.facebook.com/juicyfresh.co?locale=id_ID" target="_blank" class="text-muted text-decoration-none">Facebook</a>
+            </div>
+        </div>
+
+        <div class="row pt-2 pb-4">
+            <div class="col-md-6">
+                <p class="text-muted fs-6 pe-lg-5">Mendefinisikan ulang standar kesegaran organik. Tanpa batasan rasa,
+                    tanpa kompromi. Didesain dengan sangat hati-hati di Indonesia.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p class="text-muted small">&copy; 2026 JuicyFresh Incorporated. Hak cipta dilindungi undang-undang.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+    // 1. Initialize Lenis for Buttery Smooth Scroll
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like easing
+        smooth: true,
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // 2. Initialize AOS
+    AOS.init({ duration: 900, once: true, offset: 50, easing: 'ease-out-cubic' });
+
+    // Navbar blur control
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.glass-navbar');
+        if (window.scrollY > 20) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // 3. Entry Page Transition (Curtain up)
+    window.addEventListener('load', () => {
+        gsap.to("#transition-curtain", {
+            duration: 0.8,
+            scaleY: 0,
+            ease: "power4.inOut"
+        });
+    });
+
+    // 4. Exit Page Transition (Curtain down on links)
+    document.querySelectorAll('a.transition-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Ignore new tabs or anchors
+            if (this.target === '_blank' || this.href.includes('#')) return;
+
+            const href = this.getAttribute('href');
+            if (href) {
+                e.preventDefault();
+                // Slide curtain down
+                gsap.fromTo("#transition-curtain",
+                    { scaleY: 0, transformOrigin: "bottom" },
+                    {
+                        scaleY: 1,
+                        duration: 0.6,
+                        ease: "power4.inOut",
+                        onComplete: () => { window.location.href = href; }
+                    }
+                );
+            }
+        });
+    });
+        // 5. Number Counter Animation
+        const counters = document.querySelectorAll('.counter-value');
+        if (counters.length > 0) {
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const target = +entry.target.getAttribute('data-target');
+                        const duration = 2000; // 2 seconds
+                        const step = target / (duration / 16); 
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            current += step;
+                            if(current < target) {
+                                entry.target.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                entry.target.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }); // Starts when 50% visible
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        }
+
+        // 6. Swiper Init (if testimonial exists)
+        if(document.querySelector('.testimonialSwiper')) {
+            new Swiper(".testimonialSwiper", {
+                slidesPerView: 1, spaceBetween: 30, loop: true,
+                autoplay: { delay: 3500, disableOnInteraction: false },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+            });
+        }
+
+        // 7. Canvas Image Sequence Scrubbing (Apple-Style)
+        const canvas = document.getElementById("hero-lightpass");
+        if(canvas) {
+            const context = canvas.getContext("2d");
+            // GANTI INI SESUAI UKURAN ASLI RESOLUSI IMAGE KAMU (PENTING!)
+            canvas.width = 1280; 
+            canvas.height = 720; 
+
+            const frameCount = 192; // Total Frames
+            
+            const currentFrame = index => (
+                `assets/ezgif-3bff64578a2b0eb8-jpg/ezgif-frame-${index.toString().padStart(3, '0')}.png`
+            );
+
+            const images = [];
+            const seq = { frame: 0 };
+
+            for (let i = 0; i < frameCount; i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                images.push(img);
+            }
+
+            // Draw initial frame once loaded
+            images[0].onload = render;
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.to(seq, {
+                frame: frameCount - 1,
+                snap: "frame",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#hero-sequence-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5
+                },
+                onUpdate: render
+            });
+            
+            // Text Overlays Timeline
+            const textTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero-sequence-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5
+                }
+            });
+
+            textTl.to("#seq-text-1", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-1", {opacity: 0, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-2", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-2", {opacity: 0, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-3", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-3", {opacity: 0, duration: 1, ease: "power1.inOut"});
+
+            function render() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(images[seq.frame], 0, 0, canvas.width, canvas.height);
+            }
+        }
+    </script>
+<script>
+
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if(link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+    </script>
+</body>
+
+</html>

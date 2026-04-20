@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuicyFresh. - Minimalist Quality</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    
+    <div id="transition-curtain"></div>
+
+    <div class="ambient-glow"></div>
+
+    
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4 transition-link" href="index.html" style="color: var(--dark); letter-spacing: -1px;">
+                JuicyFresh.
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link transition-link " href="index.html">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="about.html">Heritage</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="menu.html">Collection</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="contact.html">Support</a></li>
+                    <li class="nav-item"><a class="nav-link transition-link " href="data_order.html">System</a></li>
+                </ul>
+                <div class="d-none d-lg-block">
+                    <a class="btn btn-premium transition-link" href="order.html">Order <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="d-lg-none mobile-order-btn" style="display:none;">
+                    <a class="btn btn-premium w-100 transition-link" href="order.html">Order Sekarang <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="height: 90px;"></div>
+
+<section id="hero-sequence-container">
+    <div id="canvas-wrapper" class="w-100 vh-100 d-flex justify-content-center align-items-center">
+        
+        <canvas id="hero-lightpass"></canvas>
+        <div class="position-absolute bottom-0 mb-5 text-muted small tracking-widest text-uppercase" style="z-index: 5;">
+            Scroll perlahan <i class="bi bi-chevron-down ms-1"></i>
+        </div>
+
+        
+        <h2 id="seq-text-1" class="position-absolute top-50 start-50 translate-middle text-center w-100 fw-bold" style="opacity: 0; font-size: clamp(3rem, 7vw, 6rem); letter-spacing: -2px; color: var(--dark); text-shadow: 0 10px 30px rgba(255,255,255,0.8); z-index: 10;">
+            Kental Merona.
+        </h2>
+        <h2 id="seq-text-2" class="position-absolute top-50 start-50 translate-middle text-center w-100 fw-bold" style="opacity: 0; font-size: clamp(3rem, 7vw, 6rem); letter-spacing: -2px; color: var(--dark); text-shadow: 0 10px 30px rgba(255,255,255,0.8); z-index: 10;">
+            Sensasi Murni.
+        </h2>
+        <h2 id="seq-text-3" class="position-absolute top-50 start-50 translate-middle text-center w-100 fw-bold" style="opacity: 0; font-size: clamp(3rem, 7vw, 6rem); letter-spacing: -2px; color: var(--dark); text-shadow: 0 10px 30px rgba(255,255,255,0.8); z-index: 10;">
+            100% Buah Asli.
+        </h2>
+    </div>
+</section>
+
+<main class="position-relative bg-white" style="z-index: 10; border-radius: 40px 40px 0 0; box-shadow: 0 -20px 50px rgba(0,0,0,0.06);">
+
+    
+    <section class="min-vh-100 d-flex align-items-center justify-content-center position-relative pt-5 overview-section-mobile">
+    <div class="container text-center pt-5 mt-5">
+        <span class="badge bg-light text-primary border border-primary px-3 py-2 rounded-pill mb-4" data-aos="fade-down"
+            style="letter-spacing: 2px; font-weight: 600;">100% ORGANIC INGREDIENTS</span>
+        <h1 class="fw-bold hero-heading-mobile" style="font-size: clamp(2.5rem, 6vw, 6.5rem); letter-spacing:-2px; color: var(--dark);"
+            data-aos="fade-up" data-aos-duration="1200">
+            Taste the <span class="text-gradient">Vibrancy.</span> <br>
+            <span style="font-weight:300;">Feel the Energy.</span>
+        </h1>
+        <p class="fs-4 text-muted mt-4 mx-auto" style="max-width: 600px; font-weight:300;" data-aos="fade-up"
+            data-aos-delay="200">
+            Lupakan jus encer dan gula buatan. Kami menekan intisari alam secara langsung ke dalam setiap botol
+            JuicyFresh untuk mengembalikan energi harimu.
+        </p>
+        <div class="mt-4 mt-md-5 d-flex flex-column flex-sm-row justify-content-center gap-3 gap-md-4" data-aos="fade-up" data-aos-delay="400">
+            <a href="menu.html" class="btn btn-premium transition-link">Pesan Kelezatannya <i
+                    class="bi bi-chevron-right ms-1"></i></a>
+            <a href="#process" class="btn btn-outline-premium transition-link">Lihat Proses Kami</a>
+        </div>
+
+        
+        <div class="mt-5 pt-5 position-relative d-flex justify-content-center align-items-center desktop-product-showcase" data-aos="fade-up" data-aos-delay="600" style="height: 55vh; overflow: visible;">
+            
+            
+            <div class="position-absolute" style="transform: translateX(-240%); z-index: 1;">
+                <img src="assets/strawberry_juice.png" alt="Strawberry" class="img-fluid float-anim" style="height: 35vh; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(255, 71, 126, 0.2)); transform: rotate(-10deg); animation-duration: 6s; animation-delay: 0s;">
+            </div>
+            
+            
+            <div class="position-absolute" style="transform: translateX(-120%); z-index: 2;">
+                <img src="assets/orange_juice.png" alt="Orange" class="img-fluid float-anim" style="height: 42vh; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(255, 159, 28, 0.2)); transform: rotate(-5deg); animation-duration: 7s; animation-delay: 1.2s;">
+            </div>
+            
+            
+            <div class="position-absolute" style="transform: translateX(0); z-index: 3;">
+                <img src="assets/mango_juice.png" alt="Mango" class="img-fluid float-anim" style="height: 52vh; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(0 30px 60px rgba(255, 159, 28, 0.4)); transform: scale(1.05); animation-duration: 5.5s; animation-delay: 0.5s;">
+            </div>
+
+            
+            <div class="position-absolute" style="transform: translateX(120%); z-index: 2;">
+                <img src="assets/avocado_juice.png" alt="Avocado" class="img-fluid float-anim" style="height: 42vh; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(60, 179, 113, 0.2)); transform: rotate(5deg); animation-duration: 6.5s; animation-delay: 2s;">
+            </div>
+
+            
+            <div class="position-absolute" style="transform: translateX(240%); z-index: 1;">
+                <img src="assets/melon_juice.png" alt="Melon" class="img-fluid float-anim" style="height: 35vh; width: auto; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(0 20px 30px rgba(144, 238, 144, 0.2)); transform: rotate(10deg); animation-duration: 5.8s; animation-delay: 0.8s;">
+            </div>
+        </div>
+
+        
+        <div class="mobile-product-carousel mt-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="carousel-track" id="mobileCarouselTrack">
+                <div class="carousel-item-card float-anim" style="animation-duration:5s;animation-delay:0s;">
+                    <img src="assets/strawberry_juice.png" alt="Strawberry">
+                    <p>Berry Blush</p>
+                </div>
+                <div class="carousel-item-card float-anim" style="animation-duration:6s;animation-delay:0.5s;">
+                    <img src="assets/orange_juice.png" alt="Orange">
+                    <p>Morning Citrus</p>
+                </div>
+                <div class="carousel-item-card float-anim" style="animation-duration:5.5s;animation-delay:1s;">
+                    <img src="assets/mango_juice.png" alt="Mango">
+                    <p>Mango Tango</p>
+                </div>
+                <div class="carousel-item-card float-anim" style="animation-duration:6.5s;animation-delay:0.3s;">
+                    <img src="assets/avocado_juice.png" alt="Avocado">
+                    <p>Avo Choco Lava</p>
+                </div>
+                <div class="carousel-item-card float-anim" style="animation-duration:5.8s;animation-delay:0.8s;">
+                    <img src="assets/melon_juice.png" alt="Melon">
+                    <p>Melon Breeze</p>
+                </div>
+            </div>
+            <div class="scroll-hint"><i class="bi bi-hand-index-thumb me-1"></i> Geser untuk lihat semua</div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" id="process"
+    style="background-color: var(--bg-surface); padding-top: 100px !important; padding-bottom: 100px !important;">
+    <div class="container px-4">
+        <div class="text-center mb-5 pb-4" data-aos="fade-up">
+            <h5 class="text-primary fw-bold tracking-widest text-uppercase">Journey of Freshness</h5>
+            <h2 class="display-4 fw-bold text-dark mt-2" style="letter-spacing:-1px;">Bagaimana Kami Menciptakan <span
+                    class="text-gradient">Mahakarya.</span></h2>
+        </div>
+
+        <div class="row g-5 mt-3">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="bento-item h-100 text-center">
+                    <div class="display-3 icon-gradient mb-4"><i class="bi bi-tree"></i></div>
+                    <h3 class="fw-bold text-dark">1. Petik Subuh</h3>
+                    <p class="text-muted mt-3">Semua buah dipanen oleh mitra petani lokal kami di pagi buta (Subuh) saat
+                        kandungan air dan nutrisi sedang berada di puncak tertingginya.</p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="bento-item h-100 text-center" style="border: 2px solid var(--primary); background: white;">
+                    <div class="display-3 icon-gradient mb-4"><i class="bi bi-snow2"></i></div>
+                    <h3 class="fw-bold text-dark">2. Ekstraksi Dingin</h3>
+                    <p class="text-muted mt-3">Tanpa menggunakan pisau pisa pemanas. Kami menggunakan metode
+                        *Cold-Press* untuk memastikan 100% vitamin tidak ada yang rusak karena suhu.</p>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="bento-item h-100 text-center">
+                    <div class="display-3 icon-gradient mb-4"><i class="bi bi-box-seam"></i></div>
+                    <h3 class="fw-bold text-dark">3. Pure to Cup</h3>
+                    <p class="text-muted mt-3">Tanpa tambahan air untuk mencairkan. Hasil yang anda minum adalah
+                        kepekatan murni setara dengan memakan 3 buah utuh sekaligus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white" style="padding-top: 100px !important; padding-bottom: 100px !important;">
+    <div class="container px-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="position-relative">
+                    <div class="position-absolute top-50 start-50 translate-middle"
+                        style="width: 300px; height: 300px; background: rgba(255,71,126,0.1); filter: blur(50px); border-radius: 50%; z-index: 0;">
+                    </div>
+                    <img src="assets/strawberry_juice.png" class="img-fluid position-relative"
+                        style="z-index: 1; mix-blend-mode: multiply; filter: drop-shadow(0 20px 40px rgba(255, 71, 126, 0.2));"
+                        alt="Health Benefits">
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="display-5 fw-bold text-dark mb-4">Investasi <span class="text-gradient">Kesehatanmu</span>
+                    Dimulai dari Sini.</h2>
+                <ul class="list-unstyled mt-4">
+                    <li class="d-flex mb-4">
+                        <div class="me-4 text-gradient fs-2"><i class="bi bi-shield-plus"></i></div>
+                        <div>
+                            <h4 class="fw-bold">Immune Booster</h4>
+                            <p class="text-muted">Kaya akan Vitamin C Alami dan Antioksidan yang menjaga daya tahan
+                                tubuh dari serangan radikal bebas.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <div class="me-4 text-gradient fs-2"><i class="bi bi-activity"></i></div>
+                        <div>
+                            <h4 class="fw-bold">0% Gula Mematikan</h4>
+                            <p class="text-muted">Gula darah aman! Rasa manis mutlak didapat dari fruktosa alami mangga
+                                atau madu liar perhutani asli.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <div class="me-4 text-gradient fs-2"><i class="bi bi-emoji-smile"></i></div>
+                        <div>
+                            <h4 class="fw-bold">Mood Elevator</h4>
+                            <p class="text-muted">Penelitian membuktikan konsumsi buah segar langsung menaikkan hormon
+                                endorfin dan membuatmu lebih bahagia di kantor.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5"
+    style="background-color: var(--bg-surface); padding-top: 100px !important; padding-bottom: 100px !important;">
+        <div class="container my-5">
+            <div class="row align-items-center mb-5 pb-3 justify-content-center text-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <h5 class="text-primary fw-bold tracking-widest text-uppercase mb-2">Testimonials</h5>
+                    <h2 class="display-5 fw-bold m-0 text-dark" style="letter-spacing:-1px;">Disetujui oleh <span class="text-gradient">Para Ahli.</span></h2>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                
+                <div class="col-lg-10">
+                    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm d-flex flex-column flex-md-row align-items-md-center transition-all" style="transition: transform 0.3s; cursor: default;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.05)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';">
+                        <div class="text-md-center me-md-5 mb-4 mb-md-0 d-flex flex-md-column align-items-center" style="min-width: 150px;">
+                            <img src="https://ui-avatars.com/api/?name=Clarissa&background=ffd166&color=191923&size=100"
+                                class="rounded-circle shadow-sm mb-md-3 me-3 me-md-0" width="80" alt="Avatar">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark text-md-center">Clarissa W.</h6>
+                                <small class="text-primary fw-bold text-md-center d-block">Food Blogger</small>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-warning mb-2 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="fs-5 m-0 text-dark fst-italic" style="line-height: 1.6;">“Gila, ini serius thick banget! Harga segini dapet
+                                kualitas yang setara kaya cold pressed juice mall mahal. Langganan selalu buat teman healing di rumah!”</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-10">
+                    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm d-flex flex-column flex-md-row align-items-md-center transition-all" style="transition: transform 0.3s; cursor: default;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.05)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';">
+                        <div class="text-md-center me-md-5 mb-4 mb-md-0 d-flex flex-md-column align-items-center" style="min-width: 150px;">
+                            <img src="https://ui-avatars.com/api/?name=Reza+Dirga&background=ff477e&color=fff&size=100"
+                                class="rounded-circle shadow-sm mb-md-3 me-3 me-md-0" width="80" alt="Avatar">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark text-md-center">Reza Dirgantara</h6>
+                                <small class="text-primary fw-bold text-md-center d-block">Event Manager</small>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-warning mb-2 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="fs-5 m-0 text-dark fst-italic" style="line-height: 1.6;">“Pertama kalinya nemu jus yang beneran gak pakai biang es.
+                                Kerasa banget raw buahnya segar memanjakan lidah. Fix jadi opsi reguler di event kantor kita.”</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-10">
+                    <div class="bg-white rounded-4 p-4 p-md-5 border shadow-sm d-flex flex-column flex-md-row align-items-md-center transition-all" style="transition: transform 0.3s; cursor: default;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.05)';" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--shadow-sm)';">
+                        <div class="text-md-center me-md-5 mb-4 mb-md-0 d-flex flex-md-column align-items-center" style="min-width: 150px;">
+                            <img src="https://ui-avatars.com/api/?name=Ayu&background=ff9f1c&color=fff&size=100"
+                                class="rounded-circle shadow-sm mb-md-3 me-3 me-md-0" width="80" alt="Avatar">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark text-md-center">Ayu Putri</h6>
+                                <small class="text-primary fw-bold text-md-center d-block">Fitness Trainer</small>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="text-warning mb-2 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+                            </div>
+                            <p class="fs-5 m-0 text-dark fst-italic" style="line-height: 1.6;">“Very organic & clean! Cocok banget buat recovery badan sehabis
+                                capek nge-gym. Seri Avo Lava cokelatnya pecah banget di mulut dan bikin ketagihan.”</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white text-center" style="padding-top: 120px !important; padding-bottom: 120px !important;">
+    <div class="container">
+        <h1 class="display-3 fw-bold text-dark mb-4" data-aos="zoom-in" style="letter-spacing:-2px;">Haus? <span
+                class="text-gradient">Mari Kita Racik Kesenanganmu.</span></h1>
+        <p class="fs-4 text-muted mx-auto mb-5" style="max-width: 600px;" data-aos="fade-up">Klik di bawah untuk
+            mereservasi jus segar organiknya. Dibuat mendadak hanya untuk pesanan Anda hari ini.</p>
+        <a href="menu.html" class="btn btn-premium btn-lg transition-link px-5 py-3 shadow-lg" data-aos="fade-up"><i
+                class="bi bi-cart-check"></i> Menu Checkout</a>
+    </div>
+</section>
+</main>
+
+<div class="footer-gradient-line mt-5"></div>
+<footer class="footer pt-5 pb-4 bg-white" style="box-shadow: 0 -15px 40px rgba(0,0,0,0.04); position: relative; z-index: 10;">
+    <div class="container text-center text-md-start">
+        <div class="row align-items-center py-4 mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <h3 class="fw-bold m-0" style="color: var(--dark); letter-spacing:-1px;">JuicyFresh.</h3>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="https://www.instagram.com/juicefreshhealthy?igsh=endxendseDdnZjF0" target="_blank" class="text-muted text-decoration-none me-4">Instagram</a>
+                <a href="https://x.com/Juicyfresh5" target="_blank" class="text-muted text-decoration-none me-4">Twitter</a>
+                <a href="https://www.facebook.com/juicyfresh.co?locale=id_ID" target="_blank" class="text-muted text-decoration-none">Facebook</a>
+            </div>
+        </div>
+
+        <div class="row pt-2 pb-4">
+            <div class="col-md-6">
+                <p class="text-muted fs-6 pe-lg-5">Mendefinisikan ulang standar kesegaran organik. Tanpa batasan rasa,
+                    tanpa kompromi. Didesain dengan sangat hati-hati di Indonesia.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p class="text-muted small">&copy; 2026 JuicyFresh Incorporated. Hak cipta dilindungi undang-undang.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<script>
+    // 1. Initialize Lenis for Buttery Smooth Scroll
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like easing
+        smooth: true,
+    });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // 2. Initialize AOS
+    AOS.init({ duration: 900, once: true, offset: 50, easing: 'ease-out-cubic' });
+
+    // Navbar blur control
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.glass-navbar');
+        if (window.scrollY > 20) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // 3. Entry Page Transition (Curtain up)
+    window.addEventListener('load', () => {
+        gsap.to("#transition-curtain", {
+            duration: 0.8,
+            scaleY: 0,
+            ease: "power4.inOut"
+        });
+    });
+
+    // 4. Exit Page Transition (Curtain down on links)
+    document.querySelectorAll('a.transition-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Ignore new tabs or anchors
+            if (this.target === '_blank' || this.href.includes('#')) return;
+
+            const href = this.getAttribute('href');
+            if (href) {
+                e.preventDefault();
+                // Slide curtain down
+                gsap.fromTo("#transition-curtain",
+                    { scaleY: 0, transformOrigin: "bottom" },
+                    {
+                        scaleY: 1,
+                        duration: 0.6,
+                        ease: "power4.inOut",
+                        onComplete: () => { window.location.href = href; }
+                    }
+                );
+            }
+        });
+    });
+        // 5. Number Counter Animation
+        const counters = document.querySelectorAll('.counter-value');
+        if (counters.length > 0) {
+            const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const target = +entry.target.getAttribute('data-target');
+                        const duration = 2000; // 2 seconds
+                        const step = target / (duration / 16); 
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            current += step;
+                            if(current < target) {
+                                entry.target.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                entry.target.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }); // Starts when 50% visible
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        }
+
+        // 6. Swiper Init (if testimonial exists)
+        if(document.querySelector('.testimonialSwiper')) {
+            new Swiper(".testimonialSwiper", {
+                slidesPerView: 1, spaceBetween: 30, loop: true,
+                autoplay: { delay: 3500, disableOnInteraction: false },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+            });
+        }
+
+        // 7. Canvas Image Sequence Scrubbing (Apple-Style)
+        const canvas = document.getElementById("hero-lightpass");
+        if(canvas) {
+            const context = canvas.getContext("2d");
+            // GANTI INI SESUAI UKURAN ASLI RESOLUSI IMAGE KAMU (PENTING!)
+            canvas.width = 1280; 
+            canvas.height = 720; 
+
+            const frameCount = 192; // Total Frames
+            
+            const currentFrame = index => (
+                `assets/ezgif-3bff64578a2b0eb8-jpg/ezgif-frame-${index.toString().padStart(3, '0')}.png`
+            );
+
+            const images = [];
+            const seq = { frame: 0 };
+
+            for (let i = 0; i < frameCount; i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                images.push(img);
+            }
+
+            // Draw initial frame once loaded
+            images[0].onload = render;
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.to(seq, {
+                frame: frameCount - 1,
+                snap: "frame",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#hero-sequence-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5
+                },
+                onUpdate: render
+            });
+            
+            // Text Overlays Timeline
+            const textTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#hero-sequence-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.5
+                }
+            });
+
+            textTl.to("#seq-text-1", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-1", {opacity: 0, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-2", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-2", {opacity: 0, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-3", {opacity: 1, duration: 1, ease: "power1.inOut"})
+                  .to("#seq-text-3", {opacity: 0, duration: 1, ease: "power1.inOut"});
+
+            function render() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(images[seq.frame], 0, 0, canvas.width, canvas.height);
+            }
+        }
+    </script>
+<script>
+
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if(link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+    </script>
+<script>
+    // Mobile Carousel Drag-to-Scroll + Curved 3D Effect
+    const track = document.getElementById('mobileCarouselTrack');
+    if(track) {
+        let isDown = false, startX, scrollLeft;
+        track.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+        track.addEventListener('mouseleave', () => { isDown = false; });
+        track.addEventListener('mouseup', () => { isDown = false; });
+        track.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX) * 1.5; });
+        // Touch drag
+        track.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+        track.addEventListener('touchmove', (e) => { const x = e.touches[0].pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX); });
+
+        // Curved 3D effect on scroll
+        function updateCarouselCurve() {
+            const cards = track.querySelectorAll('.carousel-item-card');
+            const trackRect = track.getBoundingClientRect();
+            const centerX = trackRect.left + trackRect.width / 2;
+            cards.forEach(card => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+                const distance = (cardCenter - centerX) / (trackRect.width / 2);
+                const rotate = distance * 12;
+                const translateY = Math.abs(distance) * 20;
+                const scale = 1 - Math.abs(distance) * 0.15;
+                card.style.transform = `perspective(600px) rotateY(${rotate}deg) translateY(${translateY}px) scale(${Math.max(scale, 0.75)})`;
+            });
+            requestAnimationFrame(updateCarouselCurve);
+        }
+        updateCarouselCurve();
+    }
+</script>
+</body>
+
+</html>
