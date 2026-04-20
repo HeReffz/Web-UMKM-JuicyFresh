@@ -52,9 +52,12 @@
 
 <section id="hero-sequence-container">
     <div id="canvas-wrapper" class="w-100 vh-100 d-flex justify-content-center align-items-center">
-        
+        <img id="hero-sequence-placeholder" src="assets/ezgif-3bff64578a2b0eb8-jpg/ezgif-frame-000.png" alt="JuicyFresh hero" decoding="async" loading="eager">
+        <video id="hero-mobile-video" class="d-none" autoplay muted loop playsinline preload="metadata" poster="assets/ezgif-3bff64578a2b0eb8-jpg/ezgif-frame-000.png">
+            <source src="assets/hero.mp4" type="video/mp4">
+        </video>
         <canvas id="hero-lightpass"></canvas>
-        <div class="position-absolute bottom-0 mb-5 text-muted small tracking-widest text-uppercase" style="z-index: 5;">
+        <div id="hero-scroll-hint" class="position-absolute bottom-0 mb-5 text-muted small tracking-widest text-uppercase" style="z-index: 5;">
             Scroll perlahan <i class="bi bi-chevron-down ms-1"></i>
         </div>
 
@@ -449,6 +452,9 @@
 
         // 6. Canvas Image Sequence Scrubbing (Apple-Style)
         const canvas = document.getElementById("hero-lightpass");
+        const heroMobileVideo = document.getElementById("hero-mobile-video");
+        const heroPlaceholder = document.getElementById("hero-sequence-placeholder");
+        const heroScrollHint = document.getElementById("hero-scroll-hint");
         if(canvas) {
             const context = canvas.getContext("2d");
             // GANTI INI SESUAI UKURAN ASLI RESOLUSI IMAGE KAMU (PENTING!)
@@ -491,12 +497,23 @@
                 if (!image || !image.complete) return;
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                canvas.classList.add('is-ready');
+                if (heroPlaceholder) {
+                    heroPlaceholder.classList.add('is-hidden');
+                }
             }
 
             loadFrame(0);
 
             // Fallback hemat resource untuk device low-end / motion reduction.
-            if (prefersReducedMotion || isLowPowerDevice) {
+            if (prefersReducedMotion || isLowPowerDevice || isTouchDevice) {
+                canvas.classList.add('d-none');
+                if (heroMobileVideo) {
+                    heroMobileVideo.classList.remove('d-none');
+                }
+                if (heroScrollHint) {
+                    heroScrollHint.innerHTML = 'Nikmati visual pembuka <i class="bi bi-play-fill ms-1"></i>';
+                }
                 images[0].onload = render;
             } else {
                 images[0].onload = render;
