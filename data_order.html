@@ -228,7 +228,7 @@
         }
         
         // Status Update Logic
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', async function(e) {
             let target = e.target;
             // Handle if they clicked on the icon inside the link
             if(!target.classList.contains('status-update') && target.parentElement.classList.contains('status-update')) {
